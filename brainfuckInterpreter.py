@@ -7,6 +7,7 @@ programName = "brainFuckProgram.txt"
 brainFuckCharacters = ['<', '>', '+', '-', '.', ',', '[', ']']
 ARRAY_SIZE = 30000
 brainFuckArray = bytearray(ARRAY_SIZE)
+bracketDictionary = {}
 
 def loadProgram():
     with open(programName, "r", encoding="utf-8") as inputFile:
@@ -30,6 +31,28 @@ def printOnlyInstructions(program):
         print("Instructions from the specified file:\n")
         print(program)
         print("")
+
+def makeBracketDictionary(program):
+    numberOfOpeningBrackets = 0
+    numberOfClosingBrackets = 0
+    for (index, instruction) in enumerate(program):
+        if instruction == '[':
+            numberOfOpeningBrackets += 1
+            bracketDictionary[str(numberOfOpeningBrackets - 1)] = [index, 0]
+        elif instruction == ']':
+            numberOfClosingBrackets += 1
+            if numberOfClosingBrackets > numberOfOpeningBrackets:
+                print("Mistake in the program. Found closing bracket without corresponding opening bracket in position: " + str(index))
+                sys.exit()
+            for i in range(numberOfOpeningBrackets, 0, -1):
+                if bracketDictionary[str(i - 1)][1] == 0:
+                    bracketDictionary[str(i - 1)][1] = index
+                    break
+    if numberOfOpeningBrackets > numberOfClosingBrackets:
+        for i in range(numberOfOpeningBrackets):
+            if bracketDictionary[str(i)][1] == 0:
+                print("Mistake in the program. Found opening bracket without corresponding closing bracket in position: " + str(bracketDictionary[str(i)][0]))
+                sys.exit()
 
 def interpretProgram(program):
     byteArrayIndex = 0
@@ -59,4 +82,5 @@ if __name__ == '__main__':
     printOriginalProgram(roughProgram)
     onlyInstructionProgram = removeRedundantCharacters(roughProgram)
     printOnlyInstructions(onlyInstructionProgram)
+    makeBracketDictionary(onlyInstructionProgram)
     interpretProgram(onlyInstructionProgram)
