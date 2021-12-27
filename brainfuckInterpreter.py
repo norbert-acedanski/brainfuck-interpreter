@@ -43,9 +43,9 @@ def interpretProgram(program):
         elif instruction == '-':
             brainFuckArray[byteArrayIndex] = brainFuckArray[byteArrayIndex] - 1 if brainFuckArray[byteArrayIndex] > 0 else 255
         elif instruction == '.':
-            pass
+            print(chr(brainFuckArray[byteArrayIndex]))
         elif instruction == ',':
-            pass
+            brainFuckArray[byteArrayIndex] = ord(input())
         elif instruction == '[':
             pass
         elif instruction == ']':
