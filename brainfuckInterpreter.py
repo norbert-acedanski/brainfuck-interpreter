@@ -6,7 +6,7 @@ printInstructionsWithouComment = True
 programName = "brainFuckProgram.txt"
 brainFuckCharacters = ['<', '>', '+', '-', '.', ',', '[', ']']
 ARRAY_SIZE = 30000
-brainFuckArray = bytearray(30000)
+brainFuckArray = bytearray(ARRAY_SIZE)
 
 def loadProgram():
     with open(programName, "r", encoding="utf-8") as inputFile:
@@ -39,9 +39,9 @@ def interpretProgram(program):
         elif instruction == '>':
             byteArrayIndex = byteArrayIndex + 1 if byteArrayIndex < ARRAY_SIZE - 1 else 0
         elif instruction == '+':
-            pass
+            brainFuckArray[byteArrayIndex] = brainFuckArray[byteArrayIndex] + 1 if brainFuckArray[byteArrayIndex] < 255 else 0
         elif instruction == '-':
-            pass
+            brainFuckArray[byteArrayIndex] = brainFuckArray[byteArrayIndex] - 1 if brainFuckArray[byteArrayIndex] > 0 else 255
         elif instruction == '.':
             pass
         elif instruction == ',':
