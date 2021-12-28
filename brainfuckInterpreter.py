@@ -1,7 +1,7 @@
 import sys
 
 printOriginalBrainFuckProgram = True
-printInstructionsWithouComment = True
+printInstructionsWithoutComment = True
 
 programName = "brainFuckProgram.txt"
 brainFuckCharacters = ['<', '>', '+', '-', '.', ',', '[', ']']
@@ -27,7 +27,7 @@ def removeRedundantCharacters(program):
     return onlyInstructionProgram
 
 def printOnlyInstructions(program):
-    if printInstructionsWithouComment:
+    if printInstructionsWithoutComment:
         print("\nInstructions from the specified file:\n")
         print(program)
         print("")
