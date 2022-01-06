@@ -14,7 +14,7 @@ Python 3.8.0
 
 ### Working with brainfuck-interpreter:
 1. Write or copy the program to the _brainFuckProgram.txt_ file and save it.
-2. Set _printOriginalBrainFuckProgram_ and  _printInstructionsWithoutComment_ variables accordingly.
+2. Set _printOriginalBrainFuckProgram_ and  _printInstructionsWithoutComments_ variables accordingly.
 3. Run the script.
 4. After successful execution, result should be visible in the terminal window.
 

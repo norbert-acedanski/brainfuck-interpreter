@@ -2,7 +2,7 @@ from os import error
 import sys
 
 printOriginalBrainFuckProgram = True
-printInstructionsWithoutComment = True
+printInstructionsWithoutComments = True
 
 programName = "brainFuckProgram.txt"
 brainFuckCharacters = ['<', '>', '+', '-', '.', ',', '[', ']']
@@ -32,7 +32,7 @@ def removeRedundantCharacters(program):
     return onlyInstructionProgram
 
 def printOnlyInstructions(program):
-    if printInstructionsWithoutComment:
+    if printInstructionsWithoutComments:
         print("\nInstructions from the specified file:\n")
         print(program)
         print("")
