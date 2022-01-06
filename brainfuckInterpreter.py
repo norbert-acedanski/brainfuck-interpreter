@@ -1,3 +1,4 @@
+from os import error
 import sys
 
 printOriginalBrainFuckProgram = True
@@ -10,8 +11,12 @@ brainFuckArray = bytearray(ARRAY_SIZE)
 bracketList = [[], []]
 
 def loadProgram():
-    with open(programName, "r", encoding="utf-8") as inputFile:
-        roughProgram = inputFile.readlines()
+    try:
+        with open(programName, "r", encoding="utf-8") as inputFile:
+            roughProgram = inputFile.readlines()
+    except OSError:
+        print("File \"" + programName + "\" could not be opened. Check file name or file path.")
+        sys.exit()
     joinedProgram = "".join(roughProgram)
     return joinedProgram
 
