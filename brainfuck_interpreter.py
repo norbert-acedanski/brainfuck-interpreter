@@ -4,7 +4,7 @@ print_original_brainfuck_program = True
 print_instructions_without_comments = True
 
 program_filename = "brainfuck_program.txt"
-brainfuck_characters = ['<', '>', '+', '-', '.', ',', '[', ']']
+BRAINFUCK_CHARACTERS = ['<', '>', '+', '-', '.', ',', '[', ']']
 ARRAY_SIZE = 30000
 brainfuck_array = bytearray(ARRAY_SIZE)
 bracket_list = [[], []]
@@ -26,7 +26,7 @@ def print_original_program(program):
         print("")
 
 def remove_redundant_characters(program):
-    only_instruction_list = [character for character in program if character in brainfuck_characters]
+    only_instruction_list = [character for character in program if character in BRAINFUCK_CHARACTERS]
     only_instruction_program = "".join(only_instruction_list)
     return only_instruction_program
 
