@@ -13,14 +13,14 @@ Python 3.8.0
 3. Script checks for the number of brackets used (if they are not equal, script will generate a message with location of the abnormal bracket and will stop execution).
 
 ### Working with brainfuck-interpreter:
-1. Write or copy the program to the _brainFuckProgram.txt_ file and save it.
-2. Set _printOriginalBrainFuckProgram_ and  _printInstructionsWithoutComments_ variables accordingly.
+1. Write or copy the program to the *brain_fuck_program.txt* file and save it.
+2. Set *print_original_brainfuck_program* and  *print_instructions_without_comments* variables accordingly.
 3. Run the script.
 4. After successful execution, result should be visible in the terminal window.
 
 # Usage
 Print the result of the Brainfuck programming language out of boredom.
-Project contains simple "Hello World!" program in _brainFuckProgram.txt_ file.
+Project contains simple "Hello World!" program in *brain_fuck_program.txt* file.
 
 # Licence
 Distributed under the MIT License. See LICENSE file for more information.
