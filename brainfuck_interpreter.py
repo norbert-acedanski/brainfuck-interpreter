@@ -1,5 +1,3 @@
-import sys
-
 print_original_brainfuck_program = True
 print_instructions_without_comments = True
 
@@ -14,8 +12,7 @@ def load_program():
         with open(program_filename, "r", encoding="utf-8") as input_file:
             rough_program = input_file.readlines()
     except OSError:
-        print("File \"" + program_filename + "\" could not be opened. Check file name or file path.")
-        sys.exit()
+        raise FileNotFoundError("File \"" + program_filename + "\" could not be opened. Check file name or file path.")
     joined_program = "".join(rough_program)
     return joined_program
 
@@ -47,17 +44,18 @@ def make_bracket_dictionary(program):
         elif instruction == ']':
             number_of_closing_brackets += 1
             if number_of_closing_brackets > number_of_opening_brackets:
-                print("Mistake in the program. Found closing bracket without corresponding opening bracket in position: " + str(index))
-                sys.exit()
+                raise SyntaxError("Mistake in the program. Found closing bracket without corresponding opening bracket in position: " + str(index))
             for i in range(number_of_opening_brackets, 0, -1):
                 if bracket_list[1][i - 1] == 0:
                     bracket_list[1][i - 1] = index
                     break
     if number_of_opening_brackets > number_of_closing_brackets:
         for i in range(number_of_opening_brackets):
-            if bracket_list[i][1] == 0:
-                print("Mistake in the program. Found opening bracket without corresponding closing bracket in position: " + str(bracket_list[i][0]))
-                sys.exit()
+            try:
+                if bracket_list[i][1] == 0:
+                    raise SyntaxError("Mistake in the program. Found opening bracket without corresponding closing bracket in position: " + str(bracket_list[i][0]))
+            except IndexError:
+                    raise SyntaxError("Mistake in the program. Found opening bracket without corresponding closing bracket.")
 
 def interpret_program(program):
     print("\nInterpreted program:\n")
@@ -85,8 +83,7 @@ def interpret_program(program):
             instruction_index = bracket_list[0][bracket_list[1].index(instruction_index)]
             continue
         else:
-            print("Wrong input instruction at: " + str(byte_array_index))
-            sys.exit()
+            raise SyntaxError("Wrong input instruction at: " + str(byte_array_index))
         instruction_index += 1
 
 if __name__ == '__main__':
