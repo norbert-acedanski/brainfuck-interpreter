@@ -4,7 +4,7 @@
 Script is an interpreter for Brainfuck programming language.
 
 # Built With
-Python 3.8.0
+Python 3.9.10
 
 # Getting started
 
