@@ -5,9 +5,8 @@ program_filename = "brainfuck_program.txt"
 BRAINFUCK_CHARACTERS = ['<', '>', '+', '-', '.', ',', '[', ']']
 ARRAY_SIZE = 30000
 brainfuck_array = bytearray(ARRAY_SIZE)
-bracket_list = [[], []]
 
-def load_program():
+def load_program() -> str:
     try:
         with open(program_filename, "r", encoding="utf-8") as input_file:
             rough_program = input_file.readlines()
@@ -16,24 +15,24 @@ def load_program():
     joined_program = "".join(rough_program)
     return joined_program
 
-def print_original_program(program):
+def print_original_program(program: str):
     if print_original_brainfuck_program:
         print("\nOriginal program from the specified file:\n")
         print(program)
         print("")
 
-def remove_redundant_characters(program):
-    only_instruction_list = [character for character in program if character in BRAINFUCK_CHARACTERS]
-    only_instruction_program = "".join(only_instruction_list)
+def remove_redundant_characters(program: str) -> str:
+    only_instruction_program = "".join([character for character in program if character in BRAINFUCK_CHARACTERS])
     return only_instruction_program
 
-def print_only_instructions(program):
+def print_only_instructions(program: str):
     if print_instructions_without_comments:
         print("\nInstructions from the specified file:\n")
         print(program)
         print("")
 
-def make_bracket_dictionary(program):
+def make_bracket_list(program: str) -> list:
+    bracket_list = [[], []] 
     number_of_opening_brackets = 0
     number_of_closing_brackets = 0
     for (index, instruction) in enumerate(program):
@@ -51,13 +50,11 @@ def make_bracket_dictionary(program):
                     break
     if number_of_opening_brackets > number_of_closing_brackets:
         for i in range(number_of_opening_brackets):
-            try:
-                if bracket_list[i][1] == 0:
-                    raise SyntaxError("Mistake in the program. Found opening bracket without corresponding closing bracket in position: " + str(bracket_list[i][0]))
-            except IndexError:
-                    raise SyntaxError("Mistake in the program. Found opening bracket without corresponding closing bracket.")
+            if bracket_list[1][i] == 0:
+                raise SyntaxError("Mistake in the program. Found opening bracket without corresponding closing bracket in position: " + str(bracket_list[0][i]))
+    return bracket_list
 
-def interpret_program(program):
+def interpret_program(program: str, bracket_list: list):
     print("\nInterpreted program:\n")
     instruction_index = 0
     byte_array_index = 0
@@ -91,5 +88,5 @@ if __name__ == '__main__':
     print_original_program(rough_program)
     only_instruction_program = remove_redundant_characters(rough_program)
     print_only_instructions(only_instruction_program)
-    make_bracket_dictionary(only_instruction_program)
-    interpret_program(only_instruction_program)
+    bracket_list = make_bracket_list(only_instruction_program)
+    interpret_program(only_instruction_program, bracket_list)
